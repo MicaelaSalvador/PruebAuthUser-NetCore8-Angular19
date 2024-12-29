@@ -1,0 +1,10 @@
+.custom-button {
+    color: blue; /* Color del texto */
+    background-color: white; /* Color de fondo */
+    border: 1px solid blue; /* (Opcional) Borde azul */
+    margin-left: 1rem;
+  }
+  
+  .custom-button:hover {
+    background-color: #f0f0f0; /* Color de fondo al pasar el cursor */
+  }

@@ -1,0 +1,44 @@
+<mat-card appearance="outlined" style="margin: 10px auto; padding: 10px; max-width: 800px;">
+    <!-- <h3 class="text-center" style="font-weight: bold;">Editar Usuario</h3> -->
+    <mat-card-title style="text-align: center; font-weight: bold; font-size: 1rem;padding-bottom:2rem;">Editar Usuario</mat-card-title>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nombre de Usuario</mat-label>
+              <input matInput formControlName="userName" />
+              <mat-error *ngIf="userForm.controls['userName'].invalid">Campo requerido</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" />
+              <mat-error *ngIf="userForm.controls['email'].invalid">Email inválido</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Rol</mat-label>
+              <mat-select formControlName="roleId">
+                <mat-option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="userForm.controls['roleId'].invalid">Campo requerido</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Contraseña (opcional)</mat-label>
+              <input matInput formControlName="password" type="password" />
+            </mat-form-field>
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">Actualizar</button>
+            <button mat-button class="custom-button"  routerLink="/nav/detalle-user">Cancelar</button>
+          </div>
+
+    </form>
+</mat-card>

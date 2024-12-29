@@ -1,0 +1,46 @@
+<!-- <div class="d-flex">
+    <nav class="d-flex flex-column bg-dark vh-100 p-3 " style="width: 250px; ">
+        <h4 class="mb-4  bg-primary ">Menú</h4>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a routerLink="detalle-user" routerLinkActive="active" class="nav-link">
+                    Details User
+                </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="detalle-rol" routerLinkActive="active" class="nav-link">
+                    Details Role
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+  
+    <div class="flex-grow-1 p-3">
+        <router-outlet></router-outlet>
+    </div>
+</div> -->
+
+<div class="d-flex min-vh-100">
+    <!-- Navbar lateral -->
+    <nav class="d-flex flex-column bg-dark text-white p-3" style="width: 250px;">
+        <h4 class="mb-4 bg-primary text-white text-center">Menú</h4>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a routerLink="detalle-user" routerLinkActive="active" class="nav-link text-white">
+                    Details User
+                </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="detalle-rol" routerLinkActive="active" class="nav-link text-white">
+                    Details Role
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Contenido dinámico -->
+    <div class="flex-grow-1 p-3 bg-light">
+        <router-outlet></router-outlet>
+    </div>
+</div>
