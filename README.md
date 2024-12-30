@@ -50,6 +50,7 @@ Si se ejecutó correctamente debemos ver una pantalla como  esta.
  
  
 FrontEnd
+
 1._En el caso del frontend ya los descargamos en los primeros pasos que realizamos al principio, la carpeta se llama Auth_Angular19.
  
 En este caso para revisar el contenido del frontend debemos   abrir visual studio code(VSC)  y arrastrar la carpeta a la  pantalla de Visual Studio  Code.
