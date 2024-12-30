@@ -3,6 +3,7 @@ Backend
 
 
 Base de Datos.
+
 En este caso no se construyó una base de datos manualmente ya que utilizamos EntityFramework para que por medio de migrations se cree la base de datos,las tablas User y Roles en esta ultima tabla se crean dos roles Admin y User.
 
 
