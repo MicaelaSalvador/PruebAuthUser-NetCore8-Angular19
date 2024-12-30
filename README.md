@@ -12,11 +12,11 @@ El proyecto AuthWebApiPrueba, consiste en el manejo de autorización, autenticac
  
 Si lo quieres clonar solo necesita abrir una consola de Windows PowerShell, ubicarte en una carpeta o el lugar donde quieras clonarlo como en el siguiente ejemplo.
 PS C:\Users\Asus Vivobook S\Desktop> git  clone https://github.com/MicaelaSalvador/PruebAuthUser-NetCore8-Angular19.git
-En este caso yo me ubiqué en el escritorio puse git clone y el link que aparece en el recuadro marcado con azul solo se debe dar un click y se copia  automáticamente .
+En este caso yo me ubiqué en el escritorio puse git clone y el link que aparece en el recuadro verde Code y el link HTTPS  solo se debe dar un click y se copia  automáticamente .
 Después de realizar un clon aparecerán dos carpetas.
    
 Uno es el backend llamado AuthWebApiPrueba, el otro es el frontend que en la parte del frontend te lo explico.
-Si lo quieres descargar solo ve a link del proyecto en GitHub dar click  en code posteriormente descargar posteriormente debes descomprimirlo y es lo mismo  aparecerá dos  carpetas uno es el backend  y el otro el frontend como lo explique anteriormente.
+Si lo quieres descargar solo ve a link del proyecto en GitHub dar click  en code  descargarlo y posteriormente debes descomprimirlo y es lo mismo  aparecerá dos  carpetas uno es el backend  y el otro el frontend como lo explique anteriormente.
 2.- Lo primero que debes realizar es cambiar la conexión a MySQL dependiendo de la conexión local o remota con la que cuentas, en este caso yo me conecto a mi conexión local y la contraseña indicada.
 Como comentario, estoy trabajando con MySQL Workbench 8.0 CE para realizar los ejemplos.
 Nota. Si utilizas XAMPP o algo parecido, es lo mismo realiza los mismos pasos para realizar la conexión, pequeña diferencia, pero no afecta la realización de cada uno de los procedimientos es que estos servidores utilizan MariaDB.   
