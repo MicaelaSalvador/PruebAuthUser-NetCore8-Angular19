@@ -31,11 +31,13 @@ Debes ir al Explorer o explorador, localizar el nombre del proyecto en este caso
 4.- Pasos para realizar una Migración,
 
 Los siguientes pasos realízalos solo si estás trabajando con visual Studio.  
+
  Debes abrir visual studio dar click en abrir un proyecto o solución seleccionar la ubicación del proyecto AuthWebApiPrueba que clonamos o descargamos y descomprimimos anteriormente, revisar si en nuestro proyecto que no exista una carpeta llamada Migrations, si existe la carpeta dar click derecho sobre ella y seleccionar la opción Delete para eliminarla.
 Ahora que ya tienes el proyecto AuthWebApiPrueba abierto con Visual studio 2022, te doy como referencia Visual Studio 2022 Versión 17.12.3 porque por defecto instala la versión .NET 9.0 la versión más reciente, debe localizar la opción Tools posteriormente – NuGet Package Management después   -Package Magagement Consola, aquí abrirá una consola en la que pondrás el siguiente código.
 Add-Migration InitialCreate, después de que termine la ejecución ejecutar la siguiente línea de   código Update-Database, con la ejecución de estas dos líneas de código y si la conexión a la base de datos es correcta se creará una carpeta en el proyecto AuthWebApiPrueba llamado Migrations  y en  MySQL creará una  base de datos llamado  AuthUserDb  con dos tablas llamadas roles y Users, también se crean  dos roles en la tabla roles llamadas Admin,User.
 
 Los siguientes pasos realízalos solo si estás trabajando con visual studio code.
+
 Ahora ya podemos continuar con la Migración, debes abrir visual Studio Code y arrastrar la carpeta del proyecto AuthWebApiPrueba como te muestro en pasos anteriores, revisar si tienes la carpeta Migrations, si lo localizas click derecho sobre la carpeta posteriormente debes localizar la opción Delete para eliminarlo.
 Después de haber realizado los pasos anteriores debes localizar la pestaña Terminal si no lo localizas da click sobre … ahí veras la pestaña terminal dar click sobre ella y posteriormente New Terminal, sobre esa terminal que abrió poner la siguiente línea de código dotnet ef migrations add InitialCreate, cuando termine la ejecución poner la siguiente línea de código dotnet ef database update , con la ejecución de estas dos líneas de código y si la conexión a la base de datos es correcta se creará una carpeta en el proyecto AuthWebApiPrueba llamado Migrations  y en  MySQL creará una  base de datos llamado  AuthUserDb  con dos tablas llamadas roles y Users, también se crean  dos roles en la tabla roles llamadas Admin,User.
 5.- Configuración del Cors, esto nos permite hacer solicitudes a una aplicación Web de un dominio diferente.
