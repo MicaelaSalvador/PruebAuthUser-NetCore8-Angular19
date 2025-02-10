@@ -13,25 +13,39 @@ import { InsertarRolComponent } from './pages/insertar-rol/insertar-rol.componen
 import { adminRoleGuard } from './shared/guard/admin-role.guard';
 
 export const routes: Routes = [
-    {path:'', redirectTo:'/signin', pathMatch:'full'},
-    {path:'', component: UserComponent,
-        children:[
-            {path:'signup', component:RegistrationComponent},
-            {path:'signin', component:LoginComponent}
-        ]
-    },
-    {path:'nav',// ruta protegida  que tiene el navbar
-        component:NavbarComponent,
-        canActivate: [authGuard], // aplicamos el guard
-        children:[
-            {path:'detalle-user', component: PropertyUserComponent},
-            {path:'detalle-rol', component:PropertyRolComponent},
-            { path: 'usuario/editar/:id', component: EditarUsuarioComponent,  canActivate: [authRolGuard] }, 
-            { path: 'insertar_rol', component:InsertarRolComponent,canActivate: [adminRoleGuard]}, 
-            { path: 'rol/editar/:id', component: EditarRolComponent,canActivate: [adminRoleGuard]},
-            { path: '', redirectTo: 'detalle-user', pathMatch: 'full' } // Ruta predeterminada en nav
-        ],
-    },
-    { path: '**', redirectTo: '/signin' } // Redirección para rutas no encontradas
-
+  { path: '', redirectTo: '/signin', pathMatch: 'full' },
+  {
+    path: '',
+    component: UserComponent,
+    children: [
+      { path: 'signup', component: RegistrationComponent },
+      { path: 'signin', component: LoginComponent },
+    ],
+  },
+  {
+    path: 'nav', // ruta protegida  que tiene el navbar
+    component: NavbarComponent,
+    canActivate: [authGuard], // aplicamos el guard
+    children: [
+      { path: 'detalle-user', component: PropertyUserComponent },
+      { path: 'detalle-rol', component: PropertyRolComponent },
+      {
+        path: 'usuario/editar/:id',
+        component: EditarUsuarioComponent,
+        canActivate: [authRolGuard],
+      },
+      {
+        path: 'insertar_rol',
+        component: InsertarRolComponent,
+        canActivate: [adminRoleGuard],
+      },
+      {
+        path: 'rol/editar/:id',
+        component: EditarRolComponent,
+        canActivate: [adminRoleGuard],
+      },
+      { path: '', redirectTo: 'detalle-user', pathMatch: 'full' }, // Ruta predeterminada en nav
+    ],
+  },
+  { path: '**', redirectTo: '/signin' }, // Redirección para rutas no encontradas
 ];

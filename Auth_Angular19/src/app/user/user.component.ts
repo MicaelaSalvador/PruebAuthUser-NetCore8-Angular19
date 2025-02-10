@@ -4,10 +4,8 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-user',
-  imports: [ RouterOutlet],
+  imports: [RouterOutlet],
   templateUrl: './user.component.html',
-  styles: ``
+  styles: ``,
 })
-export class UserComponent {
-
-}
+export class UserComponent {}

@@ -4,7 +4,6 @@ import { environment } from '../../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-
 // Definir la interfaz para la respuesta de la API
 export interface RoleListResponse {
   totalRecords: number;
@@ -36,6 +35,7 @@ export default class RolService {
     return this.http.post<any>(`${this.URLbase}/Roles`, roleDto, { headers });
   }
 
+  //Obtener todos los  roles
   getRoles(pageNumber: number, pageSize: number): Observable<RoleListResponse> {
     const params = new HttpParams()
       .set('pageNumber', pageNumber.toString())
@@ -85,7 +85,7 @@ export default class RolService {
     });
 
     return this.http.get<RoleDto>(url, { headers }).pipe(
-      catchError(err => {
+      catchError((err) => {
         // Manejar error si la petición falla
         return throwError(() => new Error('Error al obtener el rol'));
       })
@@ -94,7 +94,7 @@ export default class RolService {
 
   deleteRole(id: number): Observable<any> {
     const token = localStorage.getItem('token');
-    
+
     if (!token) {
       return throwError(() => new Error('Token no encontrado'));
     }
@@ -105,7 +105,7 @@ export default class RolService {
 
     const url = `${this.URLbase}/Roles/${id}`;
     return this.http.delete(url, { headers }).pipe(
-      catchError(err => {
+      catchError((err) => {
         // Manejar error si la petición falla
         return throwError(() => new Error('Error al eliminar el rol'));
       })
@@ -120,5 +120,4 @@ export default class RolService {
 
   //   return this.http.delete(`${this.URLbase}/Roles/${id}`, { headers });
   // }
-
 }

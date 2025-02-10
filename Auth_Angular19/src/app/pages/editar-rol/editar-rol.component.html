@@ -1,15 +1,27 @@
-<mat-card appearance="outlined" style="margin: 10px auto; padding: 10px; max-width: 700px;">
-    <mat-card-title style="text-align: center;">Editar Rol</mat-card-title>
-    <form (ngSubmit)="updateRole()">
-      <mat-form-field appearance="fill" style="width:60%;margin: 20px;">
-        <mat-label>Nombre del rol</mat-label>
-        <input matInput [(ngModel)]="role.name" name="name" required />
-      </mat-form-field>
-      
-      <div style="display: flex; justify-content:center">
-        <button mat-flat-button color="primary" type="submit"  style="margin-right: 1rem;" [disabled]="!role.name">Actualizar</button>
-        <button mat-flat-button color="warn" [routerLink]="'/nav/detalle-rol'">Cancelar</button>
-      </div>
-    </form>
-  </mat-card>
-  
+<mat-card
+  appearance="outlined"
+  style="margin: 10px auto; padding: 10px; max-width: 700px"
+>
+  <mat-card-title style="text-align: center">Editar Rol</mat-card-title>
+  <form (ngSubmit)="updateRole()">
+    <mat-form-field appearance="fill" style="width: 60%; margin: 20px">
+      <mat-label>Nombre del rol</mat-label>
+      <input matInput [(ngModel)]="role.name" name="name" required />
+    </mat-form-field>
+
+    <div style="display: flex; justify-content: center">
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        style="margin-right: 1rem"
+        [disabled]="!role.name"
+      >
+        Actualizar
+      </button>
+      <button mat-flat-button color="warn" [routerLink]="'/nav/detalle-rol'">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</mat-card>

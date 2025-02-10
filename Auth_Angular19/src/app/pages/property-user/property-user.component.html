@@ -4,11 +4,6 @@
   >
   <div class="user-table-container">
     <table mat-table [dataSource]="dataSource" matSort>
-      <!-- <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-        <td mat-cell *matCellDef="let user"> {{user.id}} </td>
-      </ng-container> -->
-
       <ng-container matColumnDef="userName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
         <td mat-cell *matCellDef="let user">{{ user.userName }}</td>
@@ -33,15 +28,18 @@
             [routerLink]="['/nav/usuario/editar', user.id]"
             >Editar</a
           >
-          <button mat-flat-button color="warn" (click)="confirmDelete(user.id, user.userName)">Eliminar</button>
+          <button
+            mat-flat-button
+            color="warn"
+            (click)="confirmDelete(user.id, user.userName)"
+          >
+            Eliminar
+          </button>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
-
-    <!-- <mat-paginator [length]="totalRecords" [pageSize]="10" (page)="pageChanged($event)"> 
-    </mat-paginator> -->
     <mat-paginator
       [length]="totalRecords"
       [pageSize]="10"

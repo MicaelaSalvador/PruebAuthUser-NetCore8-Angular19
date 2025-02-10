@@ -1,10 +1,10 @@
 .user-table-container {
-    margin: 20px;
-  }
-  
-  mat-paginator {
-    margin-top: 20px;
-  }
-  a{
-    margin-right: 1rem;
-  }
+  margin: 20px;
+}
+
+mat-paginator {
+  margin-top: 20px;
+}
+a {
+  margin-right: 1rem;
+}

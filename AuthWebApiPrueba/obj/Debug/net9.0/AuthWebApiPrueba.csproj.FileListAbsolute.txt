@@ -234,3 +234,4 @@ C:\Users\Asus Vivobook S\Desktop\Angular_prueba\AuthWebApiPrueba\obj\Debug\net9.
 C:\Users\Asus Vivobook S\Desktop\Angular_prueba\AuthWebApiPrueba\obj\Debug\net9.0\AuthWebApiPrueba.pdb
 C:\Users\Asus Vivobook S\Desktop\Angular_prueba\AuthWebApiPrueba\obj\Debug\net9.0\AuthWebApiPrueba.genruntimeconfig.cache
 C:\Users\Asus Vivobook S\Desktop\Angular_prueba\AuthWebApiPrueba\obj\Debug\net9.0\ref\AuthWebApiPrueba.dll
+C:\Users\Asus Vivobook S\Desktop\Pruebas\Angular18Csharp9\AuthenticationAngular\AuthWebApiPrueba\obj\Debug\net9.0\AuthWebApiPrueba.sourcelink.json

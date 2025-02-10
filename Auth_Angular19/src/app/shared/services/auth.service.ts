@@ -10,29 +10,28 @@ interface LoginResponse {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
- 
-  private URLbase= environment.apiURL+'/api';
+  private URLbase = environment.apiURL + '/api';
 
   createUser(formData: any) {
-    return this.http.post(`${this.URLbase}/Auth/register`, formData );
+    return this.http.post(`${this.URLbase}/Auth/register`, formData);
   }
 
-  //   return this.http.post(`${this.URLbase}/Auth/login`, formData );
-  // signin(formData: any) {
-  // }
-  signin(email:string, password:string) :Observable<LoginResponse> {
+  signin(email: string, password: string): Observable<LoginResponse> {
     const loginData = { email, password };
-    
-    return this.http.post<LoginResponse>(`${this.URLbase}/Auth/login`, loginData);
+
+    return this.http.post<LoginResponse>(
+      `${this.URLbase}/Auth/login`,
+      loginData
+    );
   }
 
-   // Método para obtener el token desde localStorage
-   getToken(): string | null {
+  // Método para obtener el token desde localStorage
+  getToken(): string | null {
     return localStorage.getItem('token');
   }
 
@@ -45,5 +44,4 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
   }
-
 }

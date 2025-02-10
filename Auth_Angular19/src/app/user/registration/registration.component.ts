@@ -21,26 +21,23 @@ import RolService, { RoleDto } from '../../shared/services/rol.service';
   styles: ``,
 })
 export class RegistrationComponent implements OnInit {
-  constructor(
-    public service: AuthService,
-    private rolService: RolService) {}
-    
-    
-    public roles: RoleDto[] = []; // Propiedad para almacenar los roles
-    public formBuilder = inject(FormBuilder);
-    isSubmitted: boolean = false;
-    
+  constructor(public service: AuthService, private rolService: RolService) {}
+
+  public roles: RoleDto[] = []; // Propiedad para almacenar los roles
+  public formBuilder = inject(FormBuilder);
+  isSubmitted: boolean = false;
+
   passwordMatchValidator: ValidatorFn = (control: AbstractControl): null => {
     const password = control.get('password');
     const confirmPassword = control.get('confirmPassword');
-    
+
     if (password && confirmPassword && password.value != confirmPassword.value)
       confirmPassword?.setErrors({ passwordMismatch: true });
     else confirmPassword?.setErrors(null);
-    
+
     return null;
   };
-  
+
   form = this.formBuilder.group(
     {
       userName: ['', Validators.required],
@@ -58,16 +55,16 @@ export class RegistrationComponent implements OnInit {
     },
     { validators: this.passwordMatchValidator }
   );
-  
+
   ngOnInit(): void {
     this.loadRoles();
   }
-  
+
   loadRoles(): void {
     this.rolService.getRoles(1, 100).subscribe({
       next: (response) => {
         this.roles = response.roles; // Asigna los roles obtenidos desde el backend
-        console.log("roles",this.roles)
+        console.log('roles', this.roles);
       },
       error: (err) => {
         console.error('Error al cargar roles:', err);
@@ -80,7 +77,6 @@ export class RegistrationComponent implements OnInit {
       },
     });
   }
-
 
   onSubmit() {
     this.isSubmitted = true;
@@ -99,11 +95,7 @@ export class RegistrationComponent implements OnInit {
           }
         },
         error: (error) => {
-          const errorMessage =
-            error.error?.messageExistingEmail ||
-            error.error?.messageExistingUsuario ||
-            error.error?.messageNoRole ||
-            'Error al registrar el usuario.';
+          const errorMessage = error.error?.message;
 
           Swal.fire({
             icon: 'error',

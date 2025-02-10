@@ -1,86 +1,103 @@
 <div class="mb-4">
-    <h2 class="text-success">
-        Sign Up
-    </h2>
-    <div>
-        Already have an account?
-        <a routerLink="/signin" routerLinkActive="router-link-active"  class="text-decoration-none fw-medium text-success d-inlin-block">
-            Sign in
-        </a>
-    </div>
+  <h2 class="text-success">Sign Up</h2>
+  <div>
+    Already have an account?
+    <a
+      routerLink="/signin"
+      routerLinkActive="router-link-active"
+      class="text-decoration-none fw-medium text-success d-inlin-block"
+    >
+      Sign in
+    </a>
+  </div>
 </div>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
-    <div class="mb-3">
-        <input class="form-control bg-body-secondary" placeholder="User Name" formControlName="userName">
-       <div class="error-feedback"
-        *ngIf="hasDisplayableError('userName') && form.controls.userName.hasError('required')">
-        Please enter your User Name
-       </div>
+  <div class="mb-3">
+    <input
+      class="form-control bg-body-secondary"
+      placeholder="User Name"
+      formControlName="userName"
+    />
+    <div
+      class="error-feedback"
+      *ngIf="
+        hasDisplayableError('userName') &&
+        form.controls.userName.hasError('required')
+      "
+    >
+      Please enter your User Name
     </div>
+  </div>
 
-    <div class="mb-3">
-        <input class="form-control bg-body-secondary" placeholder="Email" formControlName="email">
-       <div class="error-feedback"*ngIf="hasDisplayableError('email')">
-        <div *ngIf="form.controls.email.hasError('required')">
-            Please enter your email address
-        </div>
-        <div *ngIf="form.controls.email.hasError('email')">
-            Please enter a valid address.
-        </div>
-       </div>
-    </div>
-
-    <!-- <div class="mb-3">
-        <input class="form-control bg-body-secondary" placeholder="Role" formControlName="roleName">
-       <div class="error-feedback"
-        *ngIf="hasDisplayableError('roleName') && form.controls.userName.hasError('required')">
-        Please enter your RoleId
-       </div>
-    </div> -->
-    <div class="mb-3">
-        <!-- <label for="roleSelect" class="form-label">Seleccione un rol</label> -->
-        <select
-          id="roleSelect"
-          class="form-select bg-body-secondary"
-          formControlName="roleName"
-        >
-          <option value="" disabled selected>Seleccione un rol</option>
-          <option *ngFor="let role of roles" [value]="role.name">
-            {{ role.name }}
-          </option>
-        </select>
-        <div class="error-feedback" *ngIf="hasDisplayableError('roleName')">
-          Por favor, seleccione un rol.
-        </div>
+  <div class="mb-3">
+    <input
+      class="form-control bg-body-secondary"
+      placeholder="Email"
+      formControlName="email"
+    />
+    <div class="error-feedback" *ngIf="hasDisplayableError('email')">
+      <div *ngIf="form.controls.email.hasError('required')">
+        Please enter your email address
       </div>
-      
-    <div class="mb-3">
-        <input class="form-control bg-body-secondary" placeholder="Password" formControlName="password">
-        <div class="error-feedback" *ngIf="hasDisplayableError('password') ">
-            <ng-container [ngSwitch]="form.controls.password.errors | firstKey">
-                <div *ngSwitchCase="'required'">
-                    Please enter your password.
-                </div>
-                <div *ngSwitchCase="'minlength'">
-                    Atleast 6 characters required.
-                </div>
-                <div *ngSwitchCase="'pattern'">
-                    One or more special character(s).
-                </div>
-            </ng-container>
-        </div>
-       
+      <div *ngIf="form.controls.email.hasError('email')">
+        Please enter a valid address.
+      </div>
     </div>
-   
-    <div class="mb-3">
-        <input class="form-control bg-body-secondary" placeholder="confirmPassword" formControlName="confirmPassword">
-        <div class="error-feedback"
-        *ngIf="hasDisplayableError('confirmPassword') && form.controls.confirmPassword.hasError('passwordMismatch')">
-        Passwords doesn't match.
+  </div>
+  <div class="mb-3">
+    <select
+      id="roleSelect"
+      class="form-select bg-body-secondary"
+      formControlName="roleName"
+    >
+      <option value="" disabled selected>Seleccione un rol</option>
+      <option *ngFor="let role of roles" [value]="role.name">
+        {{ role.name }}
+      </option>
+    </select>
+    <div class="error-feedback" *ngIf="hasDisplayableError('roleName')">
+      Por favor, seleccione un rol.
     </div>
+  </div>
+
+  <div class="mb-3">
+    <input
+      class="form-control bg-body-secondary"
+      placeholder="Password"
+      formControlName="password"
+    />
+    <div class="error-feedback" *ngIf="hasDisplayableError('password')">
+      <ng-container [ngSwitch]="form.controls.password.errors | firstKey">
+        <div *ngSwitchCase="'required'">Please enter your password.</div>
+        <div *ngSwitchCase="'minlength'">Atleast 6 characters required.</div>
+        <div *ngSwitchCase="'pattern'">One or more special character(s).</div>
+      </ng-container>
     </div>
-    <div class="mt-3">
-        <button type="submit" [disabled]="form.invalid" class="btn btn-success w-100 rounded-3">Register</button>
+  </div>
+
+  <div class="mb-3">
+    <input
+      class="form-control bg-body-secondary"
+      placeholder="confirmPassword"
+      formControlName="confirmPassword"
+    />
+    <div
+      class="error-feedback"
+      *ngIf="
+        hasDisplayableError('confirmPassword') &&
+        form.controls.confirmPassword.hasError('passwordMismatch')
+      "
+    >
+      Passwords doesn't match.
     </div>
+  </div>
+  <div class="mt-3">
+    <button
+      type="submit"
+      [disabled]="form.invalid"
+      class="btn btn-success w-100 rounded-3"
+    >
+      Register
+    </button>
+  </div>
 </form>

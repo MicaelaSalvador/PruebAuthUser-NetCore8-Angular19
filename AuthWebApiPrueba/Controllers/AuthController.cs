@@ -29,105 +29,6 @@ namespace AuthWebApiPrueba.Controllers
         }
 
 
-        [HttpPost("register")]
-[AllowAnonymous]
-public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
-{
-    // Verificar si ya existe un usuario con el mismo correo electrónico
-    if (await _context.Users.AnyAsync(u => u.Email.ToLower() == registerDto.Email.ToLower()))
-    {
-        return BadRequest(new { messageExistingEmail = "El correo electrónico ya está registrado." });
-    }
-
-    // Verificar que el rol proporcionado exista por nombre
-    var rol = await _context.Roles
-                             .FirstOrDefaultAsync(r => r.Name.ToLower() == registerDto.RoleName.ToLower()); // Buscar por nombre
-    if (rol == null)
-    {
-        return BadRequest(new { messageNoRole = "El rol proporcionado no existe." });
-    }
-
-    // Validar si ya existe un usuario con el mismo nombre
-    bool existeUsuario = await _context.Users.AnyAsync(r => r.UserName.ToLower() == registerDto.UserName.ToLower());
-    if (existeUsuario)
-    {
-        return BadRequest(new { messageExistingUsuario = "Ya existe un usuario con ese nombre." });
-    }
-
-    // Crear y guardar el usuario en la base de datos
-    var usuario = new User
-    {
-        UserName = registerDto.UserName,
-        Email = registerDto.Email,
-        PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerDto.Password),
-        RoleId = rol.Id // Asignar el RoleId del rol encontrado
-    };
-
-    _context.Users.Add(usuario);
-    await _context.SaveChangesAsync();
-
-    // Respuesta exitosa
-    return Ok(new
-    {
-        message = "Usuario registrado con éxito.",
-        user = new
-        {
-            UserName = registerDto.UserName,
-            Email = registerDto.Email,
-            RoleName = registerDto.RoleName // Incluir el nombre del rol en la respuesta
-        }
-    });
-}
-
-
-        // [HttpPost("register")]
-        // [AllowAnonymous]
-        // public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
-        // {
-        //     if (await _context.Users.AnyAsync(u => u.Email == registerDto.Email))
-        //     {
-        //         return BadRequest( new {
-        //             emailUsed = "El correo ya está en uso."
-        //         });
-        //     }
-
-        //     // Verificar que el rol proporcionado exista
-        //     var rol = await _context.Roles.FindAsync(registerDto.RoleId);
-        //     if (rol == null)
-        //     {
-        //         return BadRequest(new {messageNoRole="El rol proporcionado no existe."});
-        //     }
-
-        //     // Validar si ya existe un rol con el mismo nombre
-        //     bool existeUsuario = await _context.Users.AnyAsync(r => r.UserName.ToLower() == registerDto.UserName.ToLower());
-        //     if (existeUsuario)
-        //     {
-        //         return BadRequest( new {messageExistingUsuario ="Ya existe un usuario con ese nombre."});
-        //     }
-
-        //     var usuario = new User
-        //     {
-        //         UserName = registerDto.UserName,
-        //         Email = registerDto.Email,
-        //         PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerDto.Password),
-        //         RoleId = registerDto.RoleId
-        //     };
-
-        //     _context.Users.Add(usuario);
-        //     await _context.SaveChangesAsync();
-
-        //     return Ok(new
-        //     {
-        //         Message = "Usuario registrado con éxito.",
-        //         RUsuario = new
-        //         {
-        //             UserName = registerDto.UserName,
-        //             Email = registerDto.Email,
-        //             RoleId = registerDto.RoleId
-        //         }
-        //     });
-        // }
-
         // [HttpPost("register")]
         // [AllowAnonymous]
         // public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
@@ -138,8 +39,9 @@ public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         //         return BadRequest(new { messageExistingEmail = "El correo electrónico ya está registrado." });
         //     }
 
-        //     // Verificar que el rol proporcionado exista
-        //     var rol = await _context.Roles.FindAsync(registerDto.RoleId);
+        //     // Verificar que el rol proporcionado exista por nombre
+        //     var rol = await _context.Roles
+        //                              .FirstOrDefaultAsync(r => r.Name.ToLower() == registerDto.RoleName.ToLower()); // Buscar por nombre
         //     if (rol == null)
         //     {
         //         return BadRequest(new { messageNoRole = "El rol proporcionado no existe." });
@@ -158,7 +60,7 @@ public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         //         UserName = registerDto.UserName,
         //         Email = registerDto.Email,
         //         PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerDto.Password),
-        //         RoleId = registerDto.RoleId
+        //         RoleId = rol.Id // Asignar el RoleId del rol encontrado
         //     };
 
         //     _context.Users.Add(usuario);
@@ -172,13 +74,60 @@ public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         //         {
         //             UserName = registerDto.UserName,
         //             Email = registerDto.Email,
-        //             RoleId = registerDto.RoleId
+        //             RoleName = registerDto.RoleName // Incluir el nombre del rol en la respuesta
         //         }
         //     });
         // }
 
 
-        
+        [HttpPost("register")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
+        {
+            // Verificar si ya existe un usuario con el mismo nombre de usuario o correo electrónico
+            var existeUsuario = await _context.Users
+                .AnyAsync(u => u.UserName.ToLower() == registerDto.UserName.ToLower() ||
+                               u.Email.ToLower() == registerDto.Email.ToLower());
+
+            if (existeUsuario)
+            {
+                return BadRequest(new { message = "El nombre de usuario o correo electrónico ya está registrado." });
+            }
+
+            // Verificar que el rol proporcionado exista por nombre
+            var rol = await _context.Roles
+                .FirstOrDefaultAsync(r => r.Name.ToLower() == registerDto.RoleName.ToLower());
+
+            if (rol == null)
+            {
+                return BadRequest(new { message = "El rol proporcionado no existe." });
+            }
+
+            // Crear y guardar el usuario en la base de datos
+            var usuario = new User
+            {
+                UserName = registerDto.UserName,
+                Email = registerDto.Email,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerDto.Password),
+                RoleId = rol.Id // Asignar el RoleId del rol encontrado
+            };
+
+            _context.Users.Add(usuario);
+            await _context.SaveChangesAsync();
+
+            // Respuesta exitosa
+            return Ok(new
+            {
+                message = "Usuario registrado con éxito.",
+                user = new
+                {
+                    UserName = registerDto.UserName,
+                    Email = registerDto.Email,
+                    RoleName = registerDto.RoleName // Incluir el nombre del rol en la respuesta
+                }
+            });
+        }
+
 
 
         // Login de usuario

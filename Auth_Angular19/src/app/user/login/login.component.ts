@@ -12,9 +12,8 @@ import { AuthService } from '../../shared/services/auth.service';
   styles: ``,
 })
 export class LoginComponent {
-
   constructor(private service: AuthService, private router: Router) {}
-  
+
   public formBuilder = inject(FormBuilder);
   isSubmitted: boolean = false;
 
@@ -72,5 +71,4 @@ export class LoginComponent {
       });
     }
   }
-
 }

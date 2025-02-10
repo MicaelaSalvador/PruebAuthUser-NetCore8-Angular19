@@ -52,64 +52,38 @@ export class EditarUsuarioComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) {
     this.userForm = this.fb.group({
       userName: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
+      // email: ['', Validators.required, Validators.email],
+      email: ['', [Validators.required, Validators.email]], // Validadores síncronos
       roleId: ['', Validators.required],
       password: [''], // campo  opcional
     });
     this.userId = 0; // Inicializamos el ID
   }
 
-  // ngOnInit(): void {
-  //   this.userId = Number(this.route.snapshot.paramMap.get('id'));
-
-  //   // cargar roles desde el backend
-  //   this.serviceRole.getRoles().subscribe({
-  //     next: (roles) => {
-  //       this.roles = roles; // asignar los roles traidos desde el backend
-  //     },
-  //     error: (err) => {
-  //       console.error('Error al cargar  los  roles :', err);
-  //       Swal.fire('error', 'No se pudieron cargar  los roles', 'error');
-  //     },
-  //   });
-
-  //   // Cargar  los datos del  usuario
-  //   this.service.getUserById(this.userId).subscribe({
-  //     next: (user) => {
-  //       this.userForm.patchValue({
-  //         userName: user.userName,
-  //         email: user.email,
-  //         roleId: this.roles.find((role) => role.name === user.role)?.id,
-  //       });
-  //     },
-  //     error: (err) => {
-  //       console.error('Error al cargar usuario:', err);
-  //       // alert('No se pudo cargar el usuario);
-  //       Swal.fire('error','No se pudo cargar el usuario','error');
-  //       this.router.navigate(['/nav/detalle-user']);
-  //     },
-  //   });
-  // }
-
   ngOnInit(): void {
     this.userId = Number(this.route.snapshot.paramMap.get('id'));
 
-    // Cargar roles y luego cargar los datos del usuario
+    // Cargar roles
     this.serviceRole
       .getRoles(1, 100)
       .pipe(
-        // Aquí pasamos valores por defecto
         switchMap((response) => {
-          this.roles = response.roles; // Obtener la lista de roles desde la respuesta
-          return this.service.getUserById(this.userId); // Llamada al usuario
+          this.roles = response.roles; // Guardamos la lista de roles
+          return this.service.getUserById(this.userId); // Cargar los datos del usuario después
         })
       )
       .subscribe({
         next: (user) => {
+          // Buscar el ID del rol basado en el nombre del rol
+          const selectedRole = this.roles.find(
+            (role) => role.name === user.role
+          )?.id;
+
+          // Asignar valores al formulario
           this.userForm.patchValue({
             userName: user.userName,
             email: user.email,
-            roleId: this.roles.find((role) => role.name === user.role)?.id,
+            roleId: selectedRole || '', // Asegurar que no sea undefined
           });
         },
         error: (err) => {
@@ -136,7 +110,8 @@ export class EditarUsuarioComponent implements OnInit {
       },
       error: (err) => {
         // Mostrar el mensaje de error devuelto por el backend, o un mensaje genérico si no está disponible
-        const errorMessage = err.error?.message || 'Ocurrió un error al actualizar el usuario.';
+        const errorMessage =
+          err.error?.message || 'Ocurrió un error al actualizar el usuario.';
         console.error('Error al actualizar usuario:', errorMessage);
         Swal.fire('Error', errorMessage, 'error');
       },

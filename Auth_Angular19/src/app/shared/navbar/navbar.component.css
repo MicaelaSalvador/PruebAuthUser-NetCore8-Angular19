@@ -1,55 +1,30 @@
-/* 
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.d-flex {
+  min-height: 100vh; /* El contenedor principal ocupa al menos toda la altura de la pantalla */
+}
+
 nav {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .nav-link {
-    font-size: 1.2rem;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  height: auto; /* Permite que el nav crezca con el contenido */
+  min-height: 100%; /* Asegura que el navbar mínimo tenga el alto del contenedor principal */
+}
 
-  .nav-link.active {
-    background-color: #007bff;
-    color: white;
-  }
+.nav-link.active {
+  background-color: #007bff;
+  color: white;
+}
 
-  html, body {
-    height: 100%;
-    margin: 0;
-  }
-  
-  .d-flex {
-    height: 100vh;
-  } */
+.bg-dark {
+  background-color: #343a40 !important; /* Colorea el navbar con bg-dark */
+}
 
-
-  html, body {
-    height: 100%;
-    margin: 0;
-  }
-  
-  .d-flex {
-    min-height: 100vh; /* El contenedor principal ocupa al menos toda la altura de la pantalla */
-  }
-  
-  nav {
-    display: flex;
-    flex-direction: column;
-    height: auto; /* Permite que el nav crezca con el contenido */
-    min-height: 100%; /* Asegura que el navbar mínimo tenga el alto del contenedor principal */
-  }
-  
-  .nav-link.active {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .bg-dark {
-    background-color: #343a40 !important; /* Colorea el navbar con bg-dark */
-  }
-  
-
-  /* Estilo general del enlace */
+/* Estilo general del enlace */
 .nav-link {
   color: #ffffff; /* Texto blanco por defecto */
   transition: background-color 0.3s, color 0.3s; /* Transición suave */
